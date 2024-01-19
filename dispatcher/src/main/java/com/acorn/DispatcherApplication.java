@@ -1,13 +1,11 @@
 package com.acorn;
 
-/**
- * Hello world!
- *
- */
-public class Dispatcher 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class DispatcherApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(DispatcherApplication.class);
     }
 }
