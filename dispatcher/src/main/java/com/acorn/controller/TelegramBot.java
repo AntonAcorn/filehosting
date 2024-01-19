@@ -1,6 +1,7 @@
 package com.acorn.controller;
 
 import com.acorn.config.BotConfig;
+import com.acorn.utils.MessageUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     private final BotConfig botConfig;
     private final UpdateController updateController;
+    private final MessageUtils messageUtils;
 
     /***
      *  В телеграмбот внедряется ссылка на updateController, после внедрения зависимости
@@ -43,10 +45,8 @@ public class TelegramBot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
-            var messageText = update.getMessage().getText();
-            var chatId = update.getMessage().getChatId();
-            var sendMessage = new SendMessage(chatId.toString(), messageText);
-            sendResponseMessage(sendMessage);
+            var hello = messageUtils.generateMessageToSend(update, "Hello");
+            sendResponseMessage(hello);
         }
     }
 
