@@ -1,26 +1,27 @@
 package com.acorn.controller;
 
-import org.springframework.beans.factory.annotation.Value;
+import com.acorn.config.BotConfig;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+@Component
+@RequiredArgsConstructor
 public class TelegramBot extends TelegramLongPollingBot {
 
-    @Value("${bot.username}")
-    private String botUsername;
-    @Value("${bot.token}")
-    private String botToken;
+    private final BotConfig botConfig;
 
     @Override
     public String getBotUsername() {
-        return botUsername;
+        return botConfig.getBotUsername();
     }
 
     @Override
     public String getBotToken() {
-        return botToken;
+        return botConfig.getBotToken();
     }
 
     @Override
@@ -40,6 +41,6 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     private String processMessage(String messageText) {
         System.out.println(messageText);
-        return messageText;
+            return messageText;
     }
 }
