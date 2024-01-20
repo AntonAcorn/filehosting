@@ -44,15 +44,12 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        if (update.hasMessage() && update.getMessage().hasText()) {
-            var hello = messageUtils.generateMessageToSend(update, "Hello");
-            sendResponseMessage(hello);
-        }
+            updateController.processUpdate(update);
     }
 
-    private void sendResponseMessage(SendMessage sendMessage) {
+    public void sendResponseMessage(SendMessage message) {
         try {
-            execute(sendMessage);
+            execute(message);
         } catch (TelegramApiException e) {
             log.error(String.valueOf(e));
         }
