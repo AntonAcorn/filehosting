@@ -72,7 +72,7 @@ public class UpdateController {
 
     private void processTextMessage(Update update) {
         updateProducer.produce(TEXT_MESSAGE_UPDATE, update);
-        var message = messageUtils.generateMessageToSend(update, "Text received");
+        var message = messageUtils.generateMessageToSend(update, "Hello, " + update.getMessage().getFrom().getFirstName());
         telegramBot.sendResponseMessage(message);
     }
 }
