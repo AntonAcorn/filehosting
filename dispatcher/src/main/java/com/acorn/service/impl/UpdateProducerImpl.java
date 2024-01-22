@@ -2,7 +2,6 @@ package com.acorn.service.impl;
 
 import com.acorn.service.UpdateProducer;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
@@ -23,7 +22,7 @@ public class UpdateProducerImpl implements UpdateProducer {
      */
     @Override
     public void produce(String rabbitQueue, Update update) {
-        log.debug(update.getMessage().getText());
-        //rabbitTemplate.convertAndSend(rabbitQueue, update);
+        log.debug("[DISPATCHER PRODUCER] " + update.getMessage().getText());
+        rabbitTemplate.convertAndSend(rabbitQueue, update);
     }
 }

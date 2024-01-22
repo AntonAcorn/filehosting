@@ -5,6 +5,7 @@ import com.acorn.utils.MessageUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import static com.acorn.RabbitQueueDestination.DOC_MESSAGE_UPDATE;
@@ -55,24 +56,28 @@ public class UpdateController {
 
     private void processUnsupportedMessage(Update update) {
         var message = messageUtils.generateMessageToSend(update, "A not supported type message was received.");
-        telegramBot.sendResponseMessage(message);
+        sendMessage(message);;
     }
 
     private void processPhotoMessage(Update update) {
         updateProducer.produce(PHOTO_MESSAGE_UPDATE, update);
         var message = messageUtils.generateMessageToSend(update, "Photo received");
-        telegramBot.sendResponseMessage(message);
+        sendMessage(message);;
     }
 
     private void processDocumentMessage(Update update) {
         updateProducer.produce(DOC_MESSAGE_UPDATE, update);
         var message = messageUtils.generateMessageToSend(update, "Document received");
-        telegramBot.sendResponseMessage(message);
+        sendMessage(message);;
     }
 
     private void processTextMessage(Update update) {
         updateProducer.produce(TEXT_MESSAGE_UPDATE, update);
         var message = messageUtils.generateMessageToSend(update, "Hello, " + update.getMessage().getFrom().getFirstName());
+        sendMessage(message);
+    }
+
+    public void sendMessage(SendMessage message){
         telegramBot.sendResponseMessage(message);
     }
 }
