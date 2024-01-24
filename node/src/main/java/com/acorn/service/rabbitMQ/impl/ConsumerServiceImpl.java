@@ -1,5 +1,8 @@
-package com.acorn.service;
+package com.acorn.service.rabbitMQ.impl;
 
+import com.acorn.service.MainService;
+import com.acorn.service.rabbitMQ.ConsumerService;
+import com.acorn.service.rabbitMQ.ProducerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -17,13 +20,13 @@ import static com.acorn.RabbitQueueDestination.TEXT_MESSAGE_UPDATE;
 public class ConsumerServiceImpl implements ConsumerService {
 
     private final ProducerService producerService;
+    private final MainService mainService;
 
     @Override
     @RabbitListener(queues = TEXT_MESSAGE_UPDATE)
     public void consumeTextMessage(Update update) {
-        log.debug("[NODE] Text message is received from [DISPATCHER]");
-        var sendMessage = new SendMessage(update.getMessage().getChatId().toString(), "Hello from NODE");
-        producerService.produceAnswer(sendMessage);
+        var message = mainService.processTextMessage(update);
+        producerService.produceAnswer(message);
     }
 
     @Override

@@ -1,5 +1,6 @@
-package com.acorn.service;
+package com.acorn.service.rabbitMQ.impl;
 
+import com.acorn.service.rabbitMQ.ProducerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
