@@ -1,8 +1,8 @@
 package com.acorn.service;
 
 import com.acorn.mapper.UpdateMapper;
+import com.acorn.model.RawData;
 import com.acorn.repository.RawDataRepository;
-import com.acorn.schema.RawData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

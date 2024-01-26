@@ -1,7 +1,7 @@
 package com.acorn.mapper;
 
 import com.acorn.entity.RawDataEntity;
-import com.acorn.schema.RawData;
+import com.acorn.model.RawData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

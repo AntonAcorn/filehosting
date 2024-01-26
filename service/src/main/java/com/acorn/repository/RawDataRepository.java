@@ -1,7 +1,8 @@
 package com.acorn.repository;
 
+
 import com.acorn.entity.RawDataEntity;
-import com.acorn.schema.RawData;
+import com.acorn.model.RawData;
 
 public interface RawDataRepository {
 

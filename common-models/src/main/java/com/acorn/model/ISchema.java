@@ -1,4 +1,4 @@
-package com.acorn.schema;
+package com.acorn.model;
 
 public interface ISchema {
 

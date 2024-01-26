@@ -1,11 +1,10 @@
-package com.acorn.schema;
+package com.acorn.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldNameConstants;
 import org.telegram.telegrambots.meta.api.objects.Update;
 

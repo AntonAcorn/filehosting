@@ -13,6 +13,9 @@
     <module>dispatcher</module>
     <module>common-rabbitmq</module>
     <module>node</module>
+    <module>persistance</module>
+    <module>common-models</module>
+    <module>service</module>
   </modules>
 
   <properties>

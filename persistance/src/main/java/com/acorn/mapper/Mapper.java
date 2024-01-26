@@ -1,7 +1,7 @@
 package com.acorn.mapper;
 
 import com.acorn.entity.BaseEntity;
-import com.acorn.schema.ISchema;
+import com.acorn.model.ISchema;
 
 public abstract class Mapper <S extends ISchema, E extends BaseEntity>{
 

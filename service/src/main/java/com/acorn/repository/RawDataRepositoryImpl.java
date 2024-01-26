@@ -3,7 +3,7 @@ package com.acorn.repository;
 import com.acorn.dao.RawDataDao;
 import com.acorn.entity.RawDataEntity;
 import com.acorn.mapper.RawDataMapper;
-import com.acorn.schema.RawData;
+import com.acorn.model.RawData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
