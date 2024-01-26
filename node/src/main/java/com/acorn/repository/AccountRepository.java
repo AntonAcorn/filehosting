@@ -5,4 +5,6 @@ import com.acorn.model.Account;
 public interface AccountRepository {
 
     Account save(Account account);
+
+    Account getByTelegramId(Long telegramId);
 }

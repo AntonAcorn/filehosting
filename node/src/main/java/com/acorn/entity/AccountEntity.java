@@ -21,7 +21,7 @@ import java.util.Objects;
 @Table(name = "account")
 public class AccountEntity extends AutoIncrementedEntity{
 
-    private String telegramId;
+    private Long telegramId;
 
     private String firstName;
 
@@ -39,9 +39,13 @@ public class AccountEntity extends AutoIncrementedEntity{
     @Column(nullable = false)
     private boolean isDeleted = false;
 
+    @Column(nullable = false)
+    private boolean isActive = false;
+
     public static AccountEntity createWithDefaultParams() {
         var accountEntity = new AccountEntity();
         accountEntity.setRoleName(RoleName.INACTIVE);
+        accountEntity.setActive(false);
         accountEntity.setDeleted(false);
         accountEntity.setDateCreated(LocalDateTime.now());
         return accountEntity;

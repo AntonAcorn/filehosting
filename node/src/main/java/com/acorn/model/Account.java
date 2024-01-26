@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @Builder(toBuilder = true)
 public class Account extends Schema {
 
-    private String telegramId;
+    private Long telegramId;
 
     private String firstName;
 
@@ -31,4 +31,6 @@ public class Account extends Schema {
     private RoleName roleName;
 
     private boolean isDeleted = false;
+
+    private boolean isActive = false;
 }

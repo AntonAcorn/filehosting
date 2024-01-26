@@ -20,7 +20,7 @@ public class MainService {
                 .update(update)
                 .build();
         var event = updateTelegramService.save(telegramEvent);
-        var account = accountService.save(telegramEvent);
+        accountService.findOrCreate(telegramEvent);
         log.info("event is saved with ID:[%s]".formatted(event.id));
         log.debug("[NODE] Text message is received from [DISPATCHER]");
         return new SendMessage(update.getMessage().getChatId().toString(), "Hello from NODE");

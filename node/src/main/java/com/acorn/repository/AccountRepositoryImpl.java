@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class AccountRepositoryImpl implements AccountRepository{
+public class AccountRepositoryImpl implements AccountRepository {
 
     private final AccountMapper accountMapper;
     private final AccountDao accountDao;
@@ -20,5 +20,12 @@ public class AccountRepositoryImpl implements AccountRepository{
         accountMapper.enrichEntityWithModelsParams(accountEntity, account);
         var savedAccountEntity = accountDao.save(accountEntity);
         return accountMapper.convertToModel(savedAccountEntity);
+    }
+
+    @Override
+    public Account getByTelegramId(Long telegramId) {
+        //var accountEntity = accountDao.getAccountEntitiesByTelegramId(telegramId);
+        //return accountMapper.convertToModel(accountEntity);
+        return null;
     }
 }
