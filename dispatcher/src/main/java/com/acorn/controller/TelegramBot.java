@@ -19,7 +19,6 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     private final BotConfig botConfig;
     private final UpdateController updateController;
-    private final MessageUtils messageUtils;
 
     /***
      *  В телеграмбот внедряется ссылка на updateController, после внедрения зависимости
