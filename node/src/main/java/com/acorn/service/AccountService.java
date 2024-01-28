@@ -1,6 +1,6 @@
 package com.acorn.service;
 
-import com.acorn.entity.RoleName;
+import com.acorn.entity.AccountState;
 import com.acorn.model.Account;
 import com.acorn.model.TelegramEvent;
 import com.acorn.repository.AccountRepository;
@@ -20,16 +20,17 @@ public class AccountService {
                 .lastName(telegramUser.getLastName())
                 .telegramId(telegramUser.getId())
                 .isActive(false)
-                .roleName(RoleName.INACTIVE)
+                .accountState(AccountState.BASIC_STATE)
                 .build();
         return accountRepository.save(account);
     }
 
-    public void findOrCreate(TelegramEvent telegramEvent) {
+    public Account findOrCreate(TelegramEvent telegramEvent) {
         var telegramId = telegramEvent.getUpdate().getMessage().getFrom().getId();
         var persistentAccount = accountRepository.getByTelegramId(telegramId);
         if (persistentAccount == null) {
-            create(telegramEvent);
+          return create(telegramEvent);
        }
+        return persistentAccount;
     }
 }

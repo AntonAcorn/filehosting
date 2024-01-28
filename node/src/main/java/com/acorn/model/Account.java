@@ -1,6 +1,6 @@
 package com.acorn.model;
 
-import com.acorn.entity.RoleName;
+import com.acorn.entity.AccountState;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -28,7 +28,7 @@ public class Account extends Schema {
 
     private LocalDateTime dateCreated;
 
-    private RoleName roleName;
+    private AccountState accountState;
 
     private boolean isDeleted = false;
 

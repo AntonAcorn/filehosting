@@ -16,7 +16,7 @@ public class AccountMapper extends Mapper<Account, AccountEntity> {
                 .email(entity.getEmail())
                 .dateCreated(entity.getDateCreated())
                 .isDeleted(entity.isDeleted())
-                .roleName(entity.getRoleName())
+                .accountState(entity.getAccountState())
                 .build();
     }
 

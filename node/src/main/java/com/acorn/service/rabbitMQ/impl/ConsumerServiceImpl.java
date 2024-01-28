@@ -21,8 +21,7 @@ public class ConsumerServiceImpl implements ConsumerService {
     @Override
     @RabbitListener(queues = RabbitQueueDestination.TEXT_MESSAGE_UPDATE)
     public void consumeTextMessage(Update update) {
-        var message = mainService.processTextMessage(update);
-        producerService.produceAnswer(message);
+        mainService.processTextMessage(update);
     }
 
     @Override

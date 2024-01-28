@@ -34,7 +34,7 @@ public class AccountEntity extends AutoIncrementedEntity{
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private RoleName roleName;
+    private AccountState accountState;
 
     @Column(nullable = false)
     private boolean isDeleted = false;
@@ -44,7 +44,7 @@ public class AccountEntity extends AutoIncrementedEntity{
 
     public static AccountEntity createWithDefaultParams() {
         var accountEntity = new AccountEntity();
-        accountEntity.setRoleName(RoleName.INACTIVE);
+        accountEntity.setAccountState(AccountState.BASIC_STATE);
         accountEntity.setActive(false);
         accountEntity.setDeleted(false);
         accountEntity.setDateCreated(LocalDateTime.now());
