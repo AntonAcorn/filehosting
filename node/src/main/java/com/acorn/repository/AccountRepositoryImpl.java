@@ -23,9 +23,21 @@ public class AccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public Account getByTelegramId(Long telegramId) {
-        //var accountEntity = accountDao.getAccountEntitiesByTelegramId(telegramId);
-        //return accountMapper.convertToModel(accountEntity);
-        return null;
+    public Account getOneByTelegramId(Long telegramId) {
+        var accountEntityByTelegramId = accountDao.findAccountEntitiesByTelegramId(telegramId);
+        if (accountEntityByTelegramId == null) {
+            return null;
+        }
+        return accountMapper.convertToModel(accountEntityByTelegramId);
     }
+
+    //TODO: to add logic if isDeleted is true
+//    private Optional<Account> findOne(Long telegramId) {
+//        return findOneProcessing(accountDao.findAccountEntitiesByTelegramId(telegramId));
+//    }
+
+//    private Optional<Account> findOneProcessing(Optional<AccountEntity> account) {
+//        return account.filter(Predicate.not(AccountEntity::isDeleted))
+//                .map(accountMapper::convertToModel);
+//    }
 }

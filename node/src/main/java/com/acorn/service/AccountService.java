@@ -27,7 +27,7 @@ public class AccountService {
 
     public Account findOrCreate(TelegramEvent telegramEvent) {
         var telegramId = telegramEvent.getUpdate().getMessage().getFrom().getId();
-        var persistentAccount = accountRepository.getByTelegramId(telegramId);
+        var persistentAccount = accountRepository.getOneByTelegramId(telegramId);
         if (persistentAccount == null) {
           return create(telegramEvent);
        }

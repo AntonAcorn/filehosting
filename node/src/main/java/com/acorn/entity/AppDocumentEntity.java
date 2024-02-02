@@ -21,17 +21,16 @@ public class AppDocumentEntity extends AutoIncrementedEntity {
     @Column(name = "file_id")
     private String fileId;
 
-    @Column(name = "file_id")
+    @Column(name = "file_name")
     private String fileName;
 
     @Column(name = "mime_type")
     private String mimeType;
 
     @Column(name = "file_size")
-    private Integer fileSize;
+    private Long fileSize;
 
     @OneToOne
-    @Column(name = "binary_content")
     private BinaryContentEntity binaryContent;
 
     @Override

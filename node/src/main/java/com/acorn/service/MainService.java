@@ -23,8 +23,8 @@ public class MainService {
     public void processTextMessage(Update update) {
         var telegramEvent = constructTelegramEvent(update);
         var chatId = telegramEvent.getUpdate().getMessage().getChatId().toString();
-        updateTelegramService.save(telegramEvent);
-        var account = accountService.findOrCreate(telegramEvent);
+        var telegramEventWithId = updateTelegramService.save(telegramEvent);
+        var account = accountService.findOrCreate(telegramEventWithId);
         var textFromTelegram = telegramEvent.getUpdate().getMessage().getText();
         if (AccountState.BASIC_STATE.equals(account.getAccountState())) {
             processCommands(textFromTelegram, chatId);
