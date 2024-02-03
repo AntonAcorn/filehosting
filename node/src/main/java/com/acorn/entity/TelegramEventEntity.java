@@ -25,7 +25,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
-@Table(name = "raw_data")
+@Table(name = "telegram_event")
 public class TelegramEventEntity extends AutoIncrementedEntity {
 
     @Column(columnDefinition = "jsonb")

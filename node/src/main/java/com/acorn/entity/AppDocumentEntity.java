@@ -15,7 +15,7 @@ import java.util.Objects;
 @Setter
 @FieldNameConstants
 @Entity
-@Table
+@Table(name = "app_document")
 public class AppDocumentEntity extends AutoIncrementedEntity {
 
     @Column(name = "file_id")

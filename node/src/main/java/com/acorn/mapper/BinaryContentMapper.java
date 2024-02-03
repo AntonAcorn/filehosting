@@ -5,11 +5,11 @@ import com.acorn.model.BinaryContent;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BinaryContentMapper extends Mapper<BinaryContent, BinaryContentEntity> {
+public class BinaryContentMapper extends Mapper<com.acorn.model.BinaryContent, BinaryContentEntity> {
 
     @Override
-    public BinaryContent convertToModel(BinaryContentEntity entity) {
-        return BinaryContent.builder()
+    public com.acorn.model.BinaryContent convertToModel(BinaryContentEntity entity) {
+        return com.acorn.model.BinaryContent.builder()
                 .binaryContent(entity.getBinaryContent())
                 .build();
     }

@@ -4,5 +4,5 @@ import com.acorn.entity.BinaryContentEntity;
 
 public interface BinaryContentRepository {
 
-    void save(BinaryContentEntity binaryContent);
+    BinaryContentEntity save(byte[] fileInBytes);
 }

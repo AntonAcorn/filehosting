@@ -1,5 +1,6 @@
 package com.acorn.service;
 
+import com.acorn.model.AppDocument;
 import com.acorn.model.BinaryContent;
 import com.acorn.model.TelegramEvent;
 import com.acorn.repository.BinaryContentRepository;
@@ -33,17 +34,14 @@ public class FileServiceImpl implements FileService {
     private String fileDownloadUri;
 
     private final BinaryContentRepository binaryContentRepository;
+    private final AppDocumentService appDocumentService;
 
     @Override
     public void processDoc(TelegramEvent telegramEvent) {
         var fileId = telegramEvent.getUpdate().getMessage().getDocument().getFileId();
         var filePath = getFilePath(fileId);
         byte[] fileInByte = downloadFile(filePath);
-        var binaryContent = BinaryContent.builder()
-                .binaryContent(fileInByte)
-                .build();
-        binaryContentRepository.save(binaryContent);
-
+        var appDocument = appDocumentService.processAndSaveAppDocumentWithFile(telegramEvent, fileInByte);
     }
 
     /**

@@ -2,10 +2,14 @@ package com.acorn.mapper;
 
 import com.acorn.entity.AppDocumentEntity;
 import com.acorn.model.AppDocument;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class AppDocumentMapper extends Mapper<AppDocument, AppDocumentEntity> {
+
+    private final BinaryContentMapper binaryContentMapper;
 
     @Override
     public AppDocument convertToModel(AppDocumentEntity entity) {
@@ -14,7 +18,7 @@ public class AppDocumentMapper extends Mapper<AppDocument, AppDocumentEntity> {
                 .fileName(entity.getFileName())
                 .fileSize(entity.getFileSize())
                 .mimeType(entity.getMimeType())
-                .binaryContent(entity.getBinaryContent())
+                .binaryContent(binaryContentMapper.convertToModel(entity.getBinaryContent()))
                 .build();
     }
 
@@ -25,6 +29,6 @@ public class AppDocumentMapper extends Mapper<AppDocument, AppDocumentEntity> {
         entity.setFileName(appDocument.getFileName());
         entity.setFileSize(appDocument.getFileSize());
         entity.setMimeType(appDocument.getMimeType());
-        entity.setBinaryContent(appDocument.getBinaryContent());
+        //TODO: BinaryContent is added in AppDocumentRepository. How to improve?
     }
 }

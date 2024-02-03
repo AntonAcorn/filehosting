@@ -8,9 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.OneToOne;
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -27,5 +24,5 @@ public class AppDocument extends Schema{
 
     private Long fileSize;
 
-    private BinaryContentEntity binaryContent;
+    private BinaryContent binaryContent;
 }
