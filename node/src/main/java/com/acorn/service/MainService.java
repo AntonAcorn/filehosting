@@ -19,6 +19,7 @@ public class MainService {
     private final TelegramEventService updateTelegramService;
     private final AccountService accountService;
     private final ProducerService producerService;
+    private final FileService fileService;
 
     public void processTextMessage(Update update) {
         var telegramEvent = constructTelegramEvent(update);
@@ -41,6 +42,7 @@ public class MainService {
         updateTelegramService.save(telegramEvent);
         var account = accountService.findOrCreate(telegramEvent);
         var textFromTelegram = telegramEvent.getUpdate().getMessage().getText();
+        fileService.processDoc(telegramEvent);
         sendMessage("This is a document stub", chatId);
     }
 
