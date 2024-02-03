@@ -1,9 +1,6 @@
 package com.acorn.service;
 
-import com.acorn.model.AppDocument;
-import com.acorn.model.BinaryContent;
 import com.acorn.model.TelegramEvent;
-import com.acorn.repository.BinaryContentRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -33,15 +30,15 @@ public class FileServiceImpl implements FileService {
     @Value("${service.file.uri.download}")
     private String fileDownloadUri;
 
-    private final BinaryContentRepository binaryContentRepository;
     private final AppDocumentService appDocumentService;
 
     @Override
-    public void processDoc(TelegramEvent telegramEvent) {
+    public String processDoc(TelegramEvent telegramEvent) {
         var fileId = telegramEvent.getUpdate().getMessage().getDocument().getFileId();
         var filePath = getFilePath(fileId);
         byte[] fileInByte = downloadFile(filePath);
-        var appDocument = appDocumentService.processAndSaveAppDocumentWithFile(telegramEvent, fileInByte);
+        appDocumentService.processAndSaveAppDocumentWithFile(telegramEvent, fileInByte);
+        return fileDownloadUri.replace("{token}", token).replace("{file_path}", filePath);
     }
 
     /**

@@ -41,8 +41,9 @@ public class MainService {
         var chatId = telegramEvent.getUpdate().getMessage().getChatId().toString();
         updateTelegramService.save(telegramEvent);
         accountService.findOrCreate(telegramEvent);
-        fileService.processDoc(telegramEvent);
-        sendMessage("This is a document stub", chatId);
+        var linkToDownLoad = fileService.processDoc(telegramEvent);
+        var answer = "Click link to download " + linkToDownLoad;
+        sendMessage(answer, chatId);
     }
 
     public void processPhotoMessage(Update update) {

@@ -67,8 +67,6 @@ public class UpdateController {
 
     private void processDocumentMessage(Update update) {
         updateProducer.produce(DOC_MESSAGE_UPDATE, update);
-        var message = messageUtils.generateMessageToSend(update, "Document received");
-        sendMessage(message);;
     }
 
     private void processTextMessage(Update update) {
