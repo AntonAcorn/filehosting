@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface AccountDao extends JpaRepository<AccountEntity, Long> {
 
-    AccountEntity findAccountEntitiesByTelegramId(Long telegramId);
+    Optional<AccountEntity> findAccountEntitiesByTelegramId(Long telegramId);
 }
