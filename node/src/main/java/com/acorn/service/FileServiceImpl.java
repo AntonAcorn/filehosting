@@ -2,7 +2,6 @@ package com.acorn.service;
 
 import com.acorn.model.TelegramEvent;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +11,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 @Component
 @RequiredArgsConstructor
@@ -25,12 +29,13 @@ public class FileServiceImpl implements FileService {
     private String fileInfoUri;
 
     @Value("${service.file.uri.download}")
-    private String fileDownload;
+    private String fileDownloadUri;
 
     @Override
     public void processDoc(TelegramEvent telegramEvent) {
         var fileId = telegramEvent.getUpdate().getMessage().getDocument().getFileId();
         var filePath = getFilePath(fileId);
+        byte[] fileInByte = downloadFile(filePath);
     }
 
     /**
@@ -63,6 +68,19 @@ public class FileServiceImpl implements FileService {
         } catch (JsonProcessingException e) {
             log.error("An error occurred while retrieving file path for ID {}: {}", fileId, e.getMessage());
             throw new RuntimeException();
+        }
+    }
+    
+    private byte[] downloadFile(String filePath) {
+        var uriForDownLoading = fileDownloadUri
+                .replace("{token}", token)
+                .replace("{file_path}", filePath);
+        try {
+            URL url = new URL(uriForDownLoading);
+            InputStream inputStream = url.openStream();
+            return inputStream.readAllBytes();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }
