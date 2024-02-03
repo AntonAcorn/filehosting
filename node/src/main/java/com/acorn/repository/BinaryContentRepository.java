@@ -1,8 +1,8 @@
 package com.acorn.repository;
 
-import com.acorn.model.BinaryContent;
+import com.acorn.entity.BinaryContentEntity;
 
 public interface BinaryContentRepository {
 
-    void save(BinaryContent binaryContent);
+    void save(BinaryContentEntity binaryContent);
 }

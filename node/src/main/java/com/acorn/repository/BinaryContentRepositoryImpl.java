@@ -1,7 +1,7 @@
 package com.acorn.repository;
 
 import com.acorn.dao.BinaryContentDao;
-import com.acorn.model.BinaryContent;
+import com.acorn.entity.BinaryContentEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +12,7 @@ public class BinaryContentRepositoryImpl implements BinaryContentRepository{
     private final BinaryContentDao binaryContentDao;
 
     @Override
-    public void save(BinaryContent binaryContent) {
+    public void save(BinaryContentEntity binaryContent) {
         binaryContentDao.save(binaryContent);
     }
 }
