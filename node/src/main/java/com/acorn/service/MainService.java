@@ -40,8 +40,7 @@ public class MainService {
         var telegramEvent = constructTelegramEvent(update);
         var chatId = telegramEvent.getUpdate().getMessage().getChatId().toString();
         updateTelegramService.save(telegramEvent);
-        var account = accountService.findOrCreate(telegramEvent);
-        var textFromTelegram = telegramEvent.getUpdate().getMessage().getText();
+        accountService.findOrCreate(telegramEvent);
         fileService.processDoc(telegramEvent);
         sendMessage("This is a document stub", chatId);
     }

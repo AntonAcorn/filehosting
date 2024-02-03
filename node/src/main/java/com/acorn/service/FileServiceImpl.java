@@ -1,6 +1,8 @@
 package com.acorn.service;
 
+import com.acorn.model.BinaryContent;
 import com.acorn.model.TelegramEvent;
+import com.acorn.repository.BinaryContentRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +16,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 @Component
@@ -31,11 +32,18 @@ public class FileServiceImpl implements FileService {
     @Value("${service.file.uri.download}")
     private String fileDownloadUri;
 
+    private final BinaryContentRepository binaryContentRepository;
+
     @Override
     public void processDoc(TelegramEvent telegramEvent) {
         var fileId = telegramEvent.getUpdate().getMessage().getDocument().getFileId();
         var filePath = getFilePath(fileId);
         byte[] fileInByte = downloadFile(filePath);
+        var binaryContent = BinaryContent.builder()
+                .binaryContent(fileInByte)
+                .build();
+        binaryContentRepository.save(binaryContent);
+
     }
 
     /**
