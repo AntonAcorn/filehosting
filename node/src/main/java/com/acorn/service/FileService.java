@@ -5,4 +5,6 @@ import com.acorn.model.TelegramEvent;
 public interface FileService {
 
     String processDoc(TelegramEvent telegramEvent);
+
+    String processPhoto(TelegramEvent telegramEvent);
 }

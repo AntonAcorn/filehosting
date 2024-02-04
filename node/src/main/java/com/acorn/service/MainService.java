@@ -50,7 +50,8 @@ public class MainService {
         var telegramEvent = constructTelegramEvent(update);
         var chatId = telegramEvent.getUpdate().getMessage().getChatId().toString();
         updateTelegramService.save(telegramEvent);
-        var account = accountService.findOrCreate(telegramEvent);
+        accountService.findOrCreate(telegramEvent);
+        fileService.processPhoto(telegramEvent);
         var textFromTelegram = telegramEvent.getUpdate().getMessage().getText();
         sendMessage("This is a photo stub", chatId);
     }

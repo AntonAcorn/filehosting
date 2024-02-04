@@ -41,6 +41,11 @@ public class FileServiceImpl implements FileService {
         return fileDownloadUri.replace("{token}", token).replace("{file_path}", filePath);
     }
 
+    @Override
+    public String processPhoto(TelegramEvent telegramEvent) {
+        return null;
+    }
+
     /**
      * Retrieves the file path for a given file ID.
      *
