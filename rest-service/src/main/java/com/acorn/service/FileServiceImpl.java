@@ -1,6 +1,5 @@
 package com.acorn.service;
 
-import com.acorn.model.AppDocument;
 import com.acorn.model.BinaryContent;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FileUtils;
@@ -22,12 +21,12 @@ public class FileServiceImpl implements FileService {
     private final AppDocumentService appDocumentService;
 
     @Override
-    public AppDocument getDoc(String docId) {
-        return null;
+    public ResponseEntity<Resource> getDocById(String docId) {
+        return ResponseEntity.ok().build();
     }
 
     @Override
-    public ResponseEntity<Resource> getPhoto(String photoId) {
+    public ResponseEntity<Resource> getPhotoById(String photoId) {
         var appPhotoById = appPhotoService.getAppPhotoById(photoId);
         if (appPhotoById == null) {
             return ResponseEntity.badRequest().build();
