@@ -20,14 +20,20 @@ public class AppPhotoEntity extends AutoIncrementedEntity {
     @Column(name = "file_id")
     private String fileId;
 
-    @Column(name = "file_name")
-    private String fileName;
+    @Column(name = "file_unique_id")
+    private String fileUniqueId;
 
-    @Column(name = "mime_type")
-    private String mimeType;
+    @Column(name = "width")
+    private Integer width;
+
+    @Column(name = "height")
+    private Integer height;
 
     @Column(name = "file_size")
-    private Long fileSize;
+    private Integer fileSize;
+
+    @Column(name = "file_path")
+    private String filePath;
 
     @OneToOne
     private BinaryContentEntity binaryContent;

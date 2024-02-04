@@ -17,11 +17,15 @@ public class AppPhoto extends Schema {
 
     private String fileId;
 
-    private String fileName;
+    private String fileUniqueId;
 
-    private String mimeType;
+    private Integer width;
 
-    private Long fileSize;
+    private Integer height;
+
+    private Integer fileSize;
+
+    private String filePath;
 
     private BinaryContent binaryContent;
 }
