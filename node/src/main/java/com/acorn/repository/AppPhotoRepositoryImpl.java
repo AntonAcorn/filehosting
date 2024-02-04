@@ -20,6 +20,12 @@ public class AppPhotoRepositoryImpl implements AppPhotoRepository {
     private final AppPhotoDao appPhotoDao;
 
     @Override
+    public AppPhoto getAppPhotoById(String photoId) {
+        var appPhotoEntity = appPhotoDao.getById(Long.valueOf(photoId));
+        return appPhotoMapper.convertToModel(appPhotoEntity);
+    }
+
+    @Override
     public AppPhoto processAndSaveAppPhotoWithFile(TelegramEvent telegramEvent, BinaryContentEntity binaryContent) {
         var appPhotoEntity = new AppPhotoEntity();
         appPhotoEntity.setBinaryContent(binaryContent);

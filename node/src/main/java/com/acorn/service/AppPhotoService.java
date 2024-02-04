@@ -17,4 +17,8 @@ public class AppPhotoService {
         var savedBinaryContent = binaryContentService.save(binaryContent);
         return appPhotoRepository.processAndSaveAppPhotoWithFile(telegramEvent, savedBinaryContent);
     }
+
+    public AppPhoto getAppPhotoById(String photoId) {
+        return appPhotoRepository.getAppPhotoById(photoId);
+    }
 }

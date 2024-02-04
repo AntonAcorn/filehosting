@@ -7,4 +7,6 @@ import com.acorn.model.TelegramEvent;
 public interface AppPhotoRepository {
 
     AppPhoto processAndSaveAppPhotoWithFile(TelegramEvent telegramEvent, BinaryContentEntity binaryContent);
+
+    AppPhoto getAppPhotoById(String photoId);
 }
