@@ -15,9 +15,11 @@ public class AppPhotoMapper extends Mapper<AppPhoto, AppPhotoEntity> {
     public AppPhoto convertToModel(AppPhotoEntity entity) {
         return AppPhoto.builder()
                 .fileId(entity.getFileId())
-                .fileName(entity.getFileName())
+                .fileUniqueId(entity.getFileUniqueId())
+                .width(entity.getWidth())
+                .height(entity.getHeight())
                 .fileSize(entity.getFileSize())
-                .mimeType(entity.getMimeType())
+                .filePath(entity.getFilePath())
                 .binaryContent(binaryContentMapper.convertToModel(entity.getBinaryContent()))
                 .build();
     }
@@ -26,9 +28,11 @@ public class AppPhotoMapper extends Mapper<AppPhoto, AppPhotoEntity> {
     public void enrichEntityWithModelsParams(AppPhotoEntity entity, AppPhoto appPhoto) {
         entity.setId(appPhoto.getId());
         entity.setFileId(appPhoto.getFileId());
-        entity.setFileName(appPhoto.getFileName());
+        entity.setFileUniqueId(appPhoto.getFileUniqueId());
+        entity.setWidth(appPhoto.getWidth());
+        entity.setHeight(appPhoto.getHeight());
         entity.setFileSize(appPhoto.getFileSize());
-        entity.setMimeType(appPhoto.getMimeType());
+        entity.setFilePath(appPhoto.getFilePath());
         //TODO: BinaryContent is added in AppDocumentRepository. How to improve?
     }
 }
