@@ -43,6 +43,11 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public String processPhoto(TelegramEvent telegramEvent) {
+        var photoSizeList = telegramEvent.getUpdate().getMessage().getPhoto();
+        var photoId = photoSizeList.size() > 1 ? photoSizeList.get(photoSizeList.size() - 1).getFileId() : photoSizeList.get(0).getFileId();
+        var filePath = getFilePath(photoId);
+        byte[] fileInByte = downloadFile(filePath);
+        appDocumentService.processAndSaveAppDocumentWithFile(telegramEvent, fileInByte);
         return null;
     }
 
