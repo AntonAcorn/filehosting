@@ -31,6 +31,7 @@ public class FileServiceImpl implements FileService {
     private String fileDownloadUri;
 
     private final AppDocumentService appDocumentService;
+    private final AppPhotoService appPhotoService;
 
     @Override
     public String processDoc(TelegramEvent telegramEvent) {
@@ -47,9 +48,8 @@ public class FileServiceImpl implements FileService {
         var photoId = photoSizeList.size() > 1 ? photoSizeList.get(photoSizeList.size() - 1).getFileId() : photoSizeList.get(0).getFileId();
         var filePath = getFilePath(photoId);
         byte[] fileInByte = downloadFile(filePath);
-        appDocumentService.processAndSaveAppDocumentWithFile(telegramEvent, fileInByte);
-        return null;
-    }
+        appPhotoService.processAndSaveAppPhotoWithFile(telegramEvent, fileInByte);
+        return fileDownloadUri.replace("{token}", token).replace("{file_path}", filePath);    }
 
     /**
      * Retrieves the file path for a given file ID.
