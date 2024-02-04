@@ -5,6 +5,7 @@ import com.acorn.model.BinaryContent;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FileUtils;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,7 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public ResponseEntity<?> getPhoto(String photoId) {
+    public ResponseEntity<Resource> getPhoto(String photoId) {
         var appPhotoById = appPhotoService.getAppPhotoById(photoId);
         if (appPhotoById == null) {
             return ResponseEntity.badRequest().build();
