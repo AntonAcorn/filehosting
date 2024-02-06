@@ -24,5 +24,4 @@ public class FileController {
     public ResponseEntity<?> getDocumentById(@RequestParam String docId) {
         return fileService.getDocById(docId);
     }
-
 }
