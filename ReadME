@@ -7,8 +7,3 @@ $ docker run -d --hostname rabbitmq --name rabbitmq -p 5672:5672 -p 15672:15672 
 
 docker run -d --hostname filehosting --name filehosting -p 5432:5432 -e POSTGRES_USER=acorn -e POSTGRES_PASSWORD=acorn -e POSTGRES_DB=filehosting -v /data:/var/lib/postgresql/filehosting --restart=unless-stopped postgres:15.2-alpine
 /data:/var/lib/postgresql/filehosting --restart=unless-stopped postgres:14.5  (/data - дата внутри контейнера, дата внутри системы /var/lib/postgresql/data)
-
-1) Все начинается с TelegramBot.java. В нем сконфигурированы токен бота и юзернэйм(которые берутся из самого телеграма). Сам бот отправляет сообщения
-2) Из телеграма приходит объект Update (см. документацию телеграмма), далее мы его обрабатываем в updateController(может переименовать в сервис?)
-3) Проверяем, что пришло (текст, документ или фото)
-4) Отправляем в очередь RabbitMQ. Принимает сервис Node (MainService в отдельном модуле, где он должен быть??)
