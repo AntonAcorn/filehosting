@@ -1,5 +1,6 @@
 package com.acorn.service;
 
+import com.acorn.enums.LinkType;
 import com.acorn.model.TelegramEvent;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -49,7 +50,13 @@ public class FileServiceImpl implements FileService {
         var filePath = getFilePath(photoId);
         byte[] fileInByte = downloadFile(filePath);
         appPhotoService.processAndSaveAppPhotoWithFile(telegramEvent, fileInByte);
-        return fileDownloadUri.replace("{token}", token).replace("{file_path}", filePath);    }
+        return fileDownloadUri.replace("{token}", token).replace("{file_path}", filePath);
+    }
+
+    @Override
+    public String generateLink(Long id, LinkType linkType) {
+        return null;
+    }
 
     /**
      * Retrieves the file path for a given file ID.
@@ -83,7 +90,7 @@ public class FileServiceImpl implements FileService {
             throw new RuntimeException();
         }
     }
-    
+
     private byte[] downloadFile(String filePath) {
         var uriForDownLoading = fileDownloadUri
                 .replace("{token}", token)
