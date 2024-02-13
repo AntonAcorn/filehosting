@@ -2,6 +2,7 @@ package com.acorn.service;
 
 import com.acorn.CryptoTool;
 import com.acorn.enums.LinkType;
+import com.acorn.model.AppDocument;
 import com.acorn.model.AppPhoto;
 import com.acorn.model.TelegramEvent;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -45,8 +46,8 @@ public class FileServiceImpl implements FileService {
         var fileId = telegramEvent.getUpdate().getMessage().getDocument().getFileId();
         var filePath = getFilePath(fileId);
         byte[] fileInByte = downloadFile(filePath);
-        appDocumentService.processAndSaveAppDocumentWithFile(telegramEvent, fileInByte);
-        return fileDownloadUri.replace("{token}", token).replace("{file_path}", filePath);
+        var appDocument = appDocumentService.processAndSaveAppDocumentWithFile(telegramEvent, fileInByte);
+        return generateLink(appDocument.getId(), LinkType.GET_DOC);
     }
 
     @Override
