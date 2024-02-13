@@ -1,6 +1,8 @@
 package com.acorn.service;
 
+import com.acorn.CryptoTool;
 import com.acorn.enums.LinkType;
+import com.acorn.model.AppPhoto;
 import com.acorn.model.TelegramEvent;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,8 +33,12 @@ public class FileServiceImpl implements FileService {
     @Value("${service.file.uri.download}")
     private String fileDownloadUri;
 
+    @Value("${link.address}")
+    private String linkAddress;
+
     private final AppDocumentService appDocumentService;
     private final AppPhotoService appPhotoService;
+    private final CryptoTool cryptoTool;
 
     @Override
     public String processDoc(TelegramEvent telegramEvent) {
@@ -49,13 +55,14 @@ public class FileServiceImpl implements FileService {
         var photoId = photoSizeList.size() > 1 ? photoSizeList.get(photoSizeList.size() - 1).getFileId() : photoSizeList.get(0).getFileId();
         var filePath = getFilePath(photoId);
         byte[] fileInByte = downloadFile(filePath);
-        appPhotoService.processAndSaveAppPhotoWithFile(telegramEvent, fileInByte);
-        return fileDownloadUri.replace("{token}", token).replace("{file_path}", filePath);
+        var appPhoto = appPhotoService.processAndSaveAppPhotoWithFile(telegramEvent, fileInByte);
+        return generateLink(appPhoto.getId(), LinkType.GET_PHOTO);
     }
 
     @Override
     public String generateLink(Long id, LinkType linkType) {
-        return null;
+        String hash = cryptoTool.hasoOf(id);
+        return "http://" + linkAddress + "/" + linkType + "?id=" + hash;
     }
 
     /**
