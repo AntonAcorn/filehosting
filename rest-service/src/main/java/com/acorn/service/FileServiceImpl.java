@@ -30,7 +30,7 @@ public class FileServiceImpl implements FileService {
     @Override
     public ResponseEntity<Resource> getPhotoById(String photoIdInHash) {
         Long photoId = cryptoTool.idOf(photoIdInHash);
-        var appPhotoById = appPhotoService.getAppPhotoById(String.valueOf(photoId));
+        var appPhotoById = appPhotoService.getAppPhotoById(photoId);
         if (appPhotoById == null) {
             return ResponseEntity.badRequest().build();
         }

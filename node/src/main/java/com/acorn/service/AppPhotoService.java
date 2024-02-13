@@ -18,7 +18,7 @@ public class AppPhotoService {
         return appPhotoRepository.processAndSaveAppPhotoWithFile(telegramEvent, savedBinaryContent);
     }
 
-    public AppPhoto getAppPhotoById(String photoId) {
+    public AppPhoto getAppPhotoById(Long photoId) {
         return appPhotoRepository.getAppPhotoById(photoId);
     }
 }

@@ -8,5 +8,5 @@ public interface AppPhotoRepository {
 
     AppPhoto processAndSaveAppPhotoWithFile(TelegramEvent telegramEvent, BinaryContentEntity binaryContent);
 
-    AppPhoto getAppPhotoById(String photoId);
+    AppPhoto getAppPhotoById(Long photoId);
 }

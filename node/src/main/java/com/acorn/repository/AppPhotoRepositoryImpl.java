@@ -20,8 +20,8 @@ public class AppPhotoRepositoryImpl implements AppPhotoRepository {
     private final AppPhotoDao appPhotoDao;
 
     @Override
-    public AppPhoto getAppPhotoById(String photoId) {
-        var appPhotoEntity = appPhotoDao.getById(Long.valueOf(photoId));
+    public AppPhoto getAppPhotoById(Long photoId) {
+        var appPhotoEntity = appPhotoDao.getById(photoId);
         return appPhotoMapper.convertToModel(appPhotoEntity);
     }
 
