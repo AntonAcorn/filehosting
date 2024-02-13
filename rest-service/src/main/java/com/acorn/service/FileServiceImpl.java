@@ -1,5 +1,6 @@
 package com.acorn.service;
 
+import com.acorn.CryptoTool;
 import com.acorn.model.BinaryContent;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FileUtils;
@@ -19,6 +20,7 @@ public class FileServiceImpl implements FileService {
 
     private final AppPhotoService appPhotoService;
     private final AppDocumentService appDocumentService;
+    private final CryptoTool cryptoTool;
 
     @Override
     public ResponseEntity<Resource> getDocById(String docId) {
@@ -26,8 +28,9 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public ResponseEntity<Resource> getPhotoById(String photoId) {
-        var appPhotoById = appPhotoService.getAppPhotoById(photoId);
+    public ResponseEntity<Resource> getPhotoById(String photoIdInHash) {
+        Long photoId = cryptoTool.idOf(photoIdInHash);
+        var appPhotoById = appPhotoService.getAppPhotoById(String.valueOf(photoId));
         if (appPhotoById == null) {
             return ResponseEntity.badRequest().build();
         }
