@@ -15,6 +15,8 @@ import lombok.Setter;
 @Builder(toBuilder = true)
 public class AppPhoto extends Schema {
 
+    private Long id;
+
     private String fileId;
 
     private String fileUniqueId;

@@ -52,7 +52,7 @@ public class MainService {
         updateTelegramService.save(telegramEvent);
         accountService.findOrCreate(telegramEvent);
         var linkToDownLoad = fileService.processPhoto(telegramEvent);
-        var answer = "Click link to download " + linkToDownLoad;
+        var answer = "Click link to download: \n" + linkToDownLoad;
         sendMessage(answer, chatId);
     }
 

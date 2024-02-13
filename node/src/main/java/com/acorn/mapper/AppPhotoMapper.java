@@ -14,6 +14,7 @@ public class AppPhotoMapper extends Mapper<AppPhoto, AppPhotoEntity> {
     @Override
     public AppPhoto convertToModel(AppPhotoEntity entity) {
         return AppPhoto.builder()
+                .id(entity.getId())
                 .fileId(entity.getFileId())
                 .fileUniqueId(entity.getFileUniqueId())
                 .width(entity.getWidth())

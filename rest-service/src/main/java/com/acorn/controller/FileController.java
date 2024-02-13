@@ -16,8 +16,8 @@ public class FileController {
     private final FileService fileService;
 
     @GetMapping("/get-photo")
-    public ResponseEntity<?> getPhotoById(@RequestParam String photoId) {
-        return fileService.getPhotoById(photoId);
+    public ResponseEntity<?> getPhotoById(@RequestParam String id) {
+        return fileService.getPhotoById(id);
     }
 
     @GetMapping("/get-document")

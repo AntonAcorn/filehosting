@@ -34,8 +34,8 @@ public class AppPhotoRepositoryImpl implements AppPhotoRepository {
         var appPhoto = constructAppPhotoFromTelegramPhotoSize(photoSize);
         appPhoto.setBinaryContent(binaryContentMapper.convertToModel(binaryContent));
         appPhotoMapper.enrichEntityWithModelsParams(appPhotoEntity, appPhoto);
-        appPhotoDao.save(appPhotoEntity);
-        return appPhotoMapper.convertToModel(appPhotoEntity);
+        var savedEntity = appPhotoDao.save(appPhotoEntity);
+        return appPhotoMapper.convertToModel(savedEntity);
     }
 
     private static AppPhoto constructAppPhotoFromTelegramPhotoSize(PhotoSize photoSize) {

@@ -63,7 +63,7 @@ public class FileServiceImpl implements FileService {
     @Override
     public String generateLink(Long id, LinkType linkType) {
         String hash = cryptoTool.hasoOf(id);
-        return "http://" + linkAddress + "/" + linkType + "?id=" + hash;
+        return linkAddress + linkType + "?id=" + hash;
     }
 
     /**
